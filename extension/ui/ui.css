@@ -1,0 +1,34 @@
+/* Shared by the popup and the Languages page. Tokens bg/panel/fg/muted/line/accent …,
+   with a neutral macOS palette: these pages sit inside Safari's own chrome. */
+:root {
+  --bg: #f5f5f7; --panel: #ffffff; --sunk: #f0f0f3; --fg: #1d1d1f; --muted: #6e6e73; --line: #d2d2d7;
+  --accent: #2f6f5b; --accent-soft: #dfeadf; --on-accent: #ffffff; --ok: #2f8a5f; --bad: #c2412d; --bad-soft: #f6dfda;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #1c1c1e; --panel: #2c2c2e; --sunk: #3a3a3c; --fg: #f5f5f7; --muted: #a1a1a6; --line: #48484a;
+  --accent: #7cc4a9; --accent-soft: #2b3a30; --on-accent: #10201a; --ok: #5cc28f; --bad: #ef7a64; --bad-soft: #3d231e;
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #1c1c1e; --panel: #2c2c2e; --sunk: #3a3a3c; --fg: #f5f5f7; --muted: #a1a1a6; --line: #48484a;
+  --accent: #7cc4a9; --accent-soft: #2b3a30; --on-accent: #10201a; --ok: #5cc28f; --bad: #ef7a64; --bad-soft: #3d231e;
+  color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 13px/1.4 var(--sans); }
+button { font: inherit; color: inherit; background: var(--panel); border: 1px solid var(--line); border-radius: 7px; padding: 5px 12px; cursor: pointer; }
+button:hover:not(:disabled) { border-color: var(--muted); }
+button:disabled { opacity: .55; cursor: default; }
+button.primary { background: var(--accent); color: var(--on-accent); border-color: transparent; font-weight: 600; }
+button.danger { color: var(--bad); }
+button.link { background: none; border: none; padding: 0; color: var(--accent); }
+select { font: inherit; color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 7px; padding: 4px 6px; min-width: 0; }
+a { color: var(--accent); }
+.muted { color: var(--muted); }
+.err { color: var(--bad); }
+.small { font-size: 12px; }
+.mono { font-family: var(--mono); font-size: 12px; }
+.bar { height: 4px; background: var(--sunk); border-radius: 2px; overflow: hidden; }
+.bar > i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+kbd { font: 11px var(--mono); background: var(--sunk); border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; }

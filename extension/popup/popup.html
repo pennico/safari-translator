@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Translate</title>
+<link rel="stylesheet" href="../ui/ui.css">
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<main id="app">
+  <div class="langs">
+    <label class="lang"><span class="muted small">From</span><select id="from"></select></label>
+    <span class="arrow" aria-hidden="true">→</span>
+    <label class="lang"><span class="muted small">To</span><select id="to"></select></label>
+  </div>
+  <p id="note" class="note muted small">Checking the page…</p>
+  <div id="progress" class="bar" hidden><i></i></div>
+  <button id="main" class="primary wide" disabled>Translate</button>
+  <label class="check"><input type="checkbox" id="always"> <span id="alwaysLabel">Always translate this site</span></label>
+  <footer>
+    <button id="languages" class="link">Languages…</button>
+    <span class="muted small" title="Keyboard shortcut: translate or show the original"><kbd>⇧⌘Y</kbd></span>
+  </footer>
+</main>
+<script src="../shared/common.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>

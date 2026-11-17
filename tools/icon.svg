@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- App icon: two speech bubbles (source text, translation) on the accent green. -->
+  <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a8a70"/><stop offset="1" stop-color="#245a49"/></linearGradient></defs>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#g)"/>
+  <path d="M12 13h22a5 5 0 0 1 5 5v13a5 5 0 0 1-5 5H22l-6 5v-5h-4a5 5 0 0 1-5-5V18a5 5 0 0 1 5-5z" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M16.5 30l5-12 5 12M18.3 26h6.4" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M30 26h22a5 5 0 0 1 5 5v13a5 5 0 0 1-5 5h-4v5l-6-5H30a5 5 0 0 1-5-5V31a5 5 0 0 1 5-5z" fill="#fff"/>
+  <path d="M33 35h17M41.5 32v3M47 35c-1.5 5-5.5 8.5-11 10.5M37 38.5c2 3 5.5 5.5 10 6.5" fill="none" stroke="#245a49" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

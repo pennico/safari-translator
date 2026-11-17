@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Translator for Safari · Languages</title>
+<link rel="stylesheet" href="../ui/ui.css">
+<link rel="stylesheet" href="languages.css">
+</head>
+<body>
+<main>
+  <h1>Translator for Safari</h1>
+  <p class="muted">Translates on this Mac with Mozilla's offline engine (the one in Firefox). Page text never leaves the Mac;
+    the only downloads are the language models below, from Mozilla.</p>
+
+  <section>
+    <h2>Settings</h2>
+    <div class="row"><label for="target">Translate into</label><select id="target"></select></div>
+    <div class="row"><label><input type="checkbox" id="chip"> Show “Translated from …” with a Show original button after translating a page</label></div>
+    <div class="row top"><span>Always translate</span><div id="sites" class="sites"></div></div>
+  </section>
+
+  <section>
+    <h2>On this Mac <span id="total" class="muted small"></span></h2>
+    <div id="installed"></div>
+  </section>
+
+  <section>
+    <h2>Available languages</h2>
+    <p class="muted small">Each direction is a separate model (about 14–45 MB to download, 22–60 MB on disk). Pairs
+      without a direct model go through English, e.g. Danish → Italian = Danish → English → Italian.
+      Models download by themselves the first time they're needed; download them here to have them ready offline.</p>
+    <input id="filter" type="search" placeholder="Filter languages" autocomplete="off">
+    <div id="available"></div>
+  </section>
+
+  <footer class="muted small">
+    <p>Models: Mozilla Firefox Translations (MPL 2.0), checked against Mozilla's SHA-256 before saving.
+      Model list from Mozilla: <span id="fetched">–</span> <button id="refresh" class="link">Refresh</button></p>
+    <p>Engine: Bergamot translator v0.6.0 (MPL 2.0) · language detection: fastText lid.176 (CC BY-SA 3.0).</p>
+    <p>Speed on this Mac: <button id="speed" class="link">Check speed</button> <span id="speedOut"></span></p>
+    <p id="status" role="status"></p>
+  </footer>
+</main>
+<script src="../shared/common.js"></script>
+<script src="languages.js"></script>
+</body>
+</html>

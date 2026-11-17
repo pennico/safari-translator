@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>engine harness</title></head>
+<body>
+<p>Runs extension/engine/worker.js as a plain page (no extension APIs), for WebKit and Chromium. See webkit-engine.mjs.</p>
+<script>
+window.runEngine = async (texts) => {
+  const w = new Worker("/ext/engine/worker.js");
+  let seq = 0;
+  const pending = new Map();
+  const t0 = performance.now();
+  let readyAt = 0;
+  const ready = new Promise((r) => { w.addEventListener("message", ({ data }) => { if (data.ready) { readyAt = performance.now() - t0; r(); } }); });
+  w.onmessage = ({ data }) => {
+    const p = pending.get(data.id);
+    if (!p || data.progress) return;
+    pending.delete(data.id);
+    data.error ? p.reject(new Error(data.error)) : p.resolve(data.result);
+  };
+  const call = (method, args) => new Promise((resolve, reject) => { const id = ++seq; pending.set(id, { resolve, reject }); w.postMessage({ id, method, args }); });
+  await ready;
+  const out = { readyMs: Math.round(readyAt) };
+  let t = performance.now();
+  out.detect = await call("detect", { text: texts[0] });
+  out.detectMs = Math.round(performance.now() - t);
+  t = performance.now();
+  await call("prepare", { from: "da", to: "en" });
+  out.prepareMs = Math.round(performance.now() - t);
+  const words = texts.join(" ").split(/\s+/).length;
+  const runs = [];
+  for (let i = 0; i < 3; i++) {
+    t = performance.now();
+    const r = await call("translate", { from: "da", to: "en", items: texts.map((x) => ({ text: x, html: false })) });
+    runs.push(Math.round(performance.now() - t));
+    out.sample = r.texts[0];
+  }
+  const h = await call("translate", { from: "da", to: "en", items: [{ text: 'Læs <span data-t="0">hele artiklen</span> om <b data-t="1">vejret</b>.', html: true }] });
+  out.html = h.texts[0];
+  out.words = words;
+  out.runsMs = runs;
+  out.wps = Math.round(words / (Math.min(...runs) / 1000));
+  w.terminate();
+  return out;
+};
+</script>
+</body></html>

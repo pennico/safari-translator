@@ -1,0 +1,6 @@
+{
+  "name": "safari-translator-jstest",
+  "private": true,
+  "description": "Loads extension/ unpacked in headless Chromium (and the engine page in WebKit) to test translation, restore, popup and speed (see README.md)",
+  "dependencies": { "playwright": "1.64.1" }
+}

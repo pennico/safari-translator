@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "Translator for Safari",
+  "short_name": "Translator",
+  "version": "0.2.0",
+  "description": "Full-page translation in Safari, including languages Apple's translation doesn't support. Offline, on-device, with Mozilla's engine.",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "64": "icons/icon-64.png",
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png",
+    "256": "icons/icon-256.png",
+    "512": "icons/icon-512.png"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Translate this page",
+    "default_icon": {
+      "16": "icons/toolbar-16.png",
+      "19": "icons/toolbar-19.png",
+      "32": "icons/toolbar-32.png",
+      "38": "icons/toolbar-38.png"
+    }
+  },
+  "background": {
+    "service_worker": "background/background.js",
+    "scripts": ["shared/common.js", "background/background.js"],
+    "preferred_environment": ["document", "service_worker"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["shared/common.js", "content/content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "permissions": ["storage", "unlimitedStorage", "contextMenus", "activeTab", "scripting"],
+  "commands": {
+    "translate-page": {
+      "suggested_key": { "default": "Ctrl+Shift+Y", "mac": "Command+Shift+Y" },
+      "description": "Translate the page, or show the original"
+    }
+  },
+  "options_ui": { "page": "options/languages.html", "open_in_tab": true },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
+  "browser_specific_settings": {
+    "safari": { "strict_min_version": "26.0" }
+  }
+}

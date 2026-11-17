@@ -1,0 +1,10 @@
+body { width: 300px; }
+main { padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+.langs { display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 6px; }
+.lang { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.lang select { width: 100%; }
+.arrow { padding-bottom: 5px; color: var(--muted); }
+.note { margin: 0; min-height: 1.4em; }
+.wide { width: 100%; padding: 7px 12px; }
+.check { display: flex; gap: 6px; align-items: center; }
+footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); padding-top: 8px; }

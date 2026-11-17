@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  private-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: No private details in the tree
+        env:
+          # Extra private patterns live in the repository variable PRIVATE_PATTERNS,
+          # never in this file (it is public).
+          PRIVATE_PATTERNS: ${{ vars.PRIVATE_PATTERNS }}
+        run: scripts/scan-private.sh
+
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Bundled engine files match their pinned SHA-256
+        run: node tools/fetch-engine.mjs --check
+      - name: Playwright and Chromium
+        working-directory: jstest
+        run: |
+          npm ci --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Unit checks (parser, model rules)
+        working-directory: jstest
+        run: node unit.mjs
+      - name: Acceptance checks in headless Chromium (models from Mozilla, through jstest/.models)
+        working-directory: jstest
+        run: node test.mjs

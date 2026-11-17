@@ -1,0 +1,12 @@
+jstest/node_modules/
+jstest/.libs/
+jstest/.profiles/
+jstest/.models/
+jstest/out/
+build/
+dist/
+*.xcodeproj/xcuserdata/
+DerivedData/
+.DS_Store
+core.[0-9]*
+private/
